@@ -1,52 +1,38 @@
-function isAdult(value){
-  if (isNaN(value)){
-    return undefined;
-  } else if (value >= 18 && value <= 122){
-    return true;
-  } else {
-    return false;
-  } 
-};
+`use strict`
+arr = [1,2,3,4]
 
-function checkMultiplicity(num1, num2){
-  if(num1 % num2 === 0){
-    return true;
-  } else if(num1 % num2 !== 0){
-    return false;
-  }else{
-    return false;
+function Myarray(){
+  this.length = 0;
+  
+  this.push = function push(item) {
+    this[this.length] = item;
+    return ++this.length;
+  };
+
+  this.pop = function () {
+    if(this.length === 0){
+      return;
+    }
+    const lastItem = this[this.length - 1];
+    delete this[--this.length];
+    return lastItem;
   }
-};
-
-
-function calcTriangle(a, b, c){
-  if(isNaN(a) || isNaN(b) || isNaN(c)){
-    return false;
-  }else if( c > (a + b) ||  b > (a + c)  || a > (b + c)){
-    return false;
-  }else{
-    return true;
+  
+  this.forEach = function forEach(func) {
+    for(let i = 0; i < this.length; i++){
+      func(this[i], i, this);
+    }
   }
-};
+  
+  this.map = function map(func) {
+    for(let i = 0; i < this.length; i++){
+      const mapNew = func(this[i], i, this);
+      return mapNew;
+    }
+  }
+  
+}
 
-function getAreaTriangle(a,b,c){
-  let semiPer = (a + b + c) / 2;
-  let square = semiPer*(semiPer - a)*(semiPer - b)*(semiPer - c);
-  return Math.sqrt(square);
-};
+const myArr = new Myarray();
 
-
-function getAreaRectangle(a,b){
-  return a * b;
-};
-
-function getAreaRhombus(a,b){
-  let area = a * b / 2;
-  return area;
-};
-
-function getAreaCylinder(height, radius){
-  const pi = 3.14;
-  let square = (2 * pi * (radius * radius)) + (2 * pi * radius * height);
-  return square;
-};
+console.log(myArr.push(1));
